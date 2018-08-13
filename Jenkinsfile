@@ -9,7 +9,7 @@ pipeline {
     stage('Deploy') {
       steps {
         azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
-                                resourceGroup: 'acostaslscicd', appName: 'acostaslscicd',
+                                resourceGroup: 'consplanuseast2', appName: 'consplanuseast2',
                                 filePath: '**/*.csx,**/*.json'
       }
     }
