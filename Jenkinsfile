@@ -11,6 +11,8 @@ pipeline {
       steps {
 
         echo "Hellow world"
+        sh "ls"
+        sh "pwd"
 
       }
     }
