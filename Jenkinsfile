@@ -20,7 +20,7 @@ pipeline {
     stage('Deploy') {
       steps {
         unstash name: 'builtSources'
-        sh "ls **"
+        sh "ls bin/"
       }
     }
   }
