@@ -1,0 +1,4 @@
+bin
+obj
+.vs/**
+.vs/azurefunctionscicd/xs/sqlite3/storage.ide-wal

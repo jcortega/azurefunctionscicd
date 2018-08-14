@@ -1,0 +1,16 @@
+﻿<Properties StartupConfiguration="{EB42A56D-0DF0-4BB9-810B-9BD79C5868F0}|Default">
+  <MonoDevelop.Ide.ItemProperties.azurefunctionscicd PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="azurefunctionscicd/HttpTrigger.cs">
+    <Files>
+      <File FileName="azurefunctionscicd/HttpTrigger.cs" Line="1" Column="1" />
+      <File FileName="azurefunctionscicd/local.settings.json" Line="1" Column="1" />
+      <File FileName="azurefunctionscicd/host.json" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
