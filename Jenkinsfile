@@ -19,8 +19,9 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        //unstash name: 'builtSources'
+
         sh "rm -rf ./*"
+        unstash name: 'builtSources'
         sh "ls ./azurefunctionscicd/bin/Debug/netstandard2.0"
       }
     }
