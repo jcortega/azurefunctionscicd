@@ -12,10 +12,7 @@ pipeline {
 
         sh "nuget restore"
         sh "msbuild /t:Build /p:Configuration=Release"
-        dir('./azurefunctionscicd/bin/Release/netstandard2.0/') {
-          stash name: 'builtSources'
-        }
-
+        stash name: 'builtSources'
       }
     }
     stage('Deploy') {
@@ -23,13 +20,12 @@ pipeline {
 
         //sh "rm -rf ./*"
         sh "ls ./azurefunctionscicd/bin/Release/netstandard2.0/*"
-        dir('builtSources') {
-          unstash name: 'builtSources'
+        unstash name: 'builtSources'
+        dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
+          azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
+                                  resourceGroup: 'consplanuseast2', appName: 'consplanuseast2',
+                                  filePath: 'azurefunctionscicd/bin/Release/netstandard2.0/**/*'
         }
-        sh "ls -al builtSources"
-        azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
-                                resourceGroup: 'consplanuseast2', appName: 'consplanuseast2',
-                                filePath: 'azurefunctionscicd/bin/Release/netstandard2.0/**/*'
 
       }
     }
