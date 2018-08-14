@@ -12,7 +12,7 @@ pipeline {
 
         sh "nuget restore"
         sh "msbuild"
-        stash includes: 'azurefunctionscicd/bin', name: 'builtSources'
+        stash includes: 'azurefunctionscicd/bin/*', name: 'builtSources'
 
       }
     }
