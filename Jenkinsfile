@@ -14,7 +14,7 @@ pipeline {
         sh "msbuild"
         sh "ls azurefunctionscicd/bin/*"
         sh "ls azurefunctionscicd/bin/**/*"
-        stash includes: 'azurefunctionscicd/bin/**/*', name: 'builtSources'
+        stash includes: 'azurefunctionscicd/bin/*', name: 'builtSources'
       }
     }
     stage('Deploy') {
