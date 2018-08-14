@@ -24,7 +24,7 @@ pipeline {
         dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
           azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
                                   resourceGroup: 'consplanuseast2', appName: 'consplanuseast2',
-                                  filePath: 'azurefunctionscicd/bin/Release/netstandard2.0/**/*'
+                                  filePath: '**/*'
         }
 
       }
