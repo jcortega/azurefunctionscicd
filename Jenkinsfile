@@ -13,7 +13,8 @@ pipeline {
         echo "Hellow world"
         sh "ls"
         sh "pwd"
-
+        sh "nuget restore"
+        sh "msbuild"
       }
     }
   }
