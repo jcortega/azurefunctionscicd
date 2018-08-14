@@ -18,7 +18,7 @@ pipeline {
     stage('Deploy') {
       steps {
 
-        sh "rm -rf ./*"
+        //sh "rm -rf ./*"
         unstash name: 'builtSources'
         sh "ls ./azurefunctionscicd/bin/Release/netstandard2.0/*"
         azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
