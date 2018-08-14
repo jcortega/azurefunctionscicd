@@ -19,9 +19,11 @@ pipeline {
       steps {
 
         //sh "rm -rf ./*"
-        unstash name: 'builtSources'
         sh "ls ./azurefunctionscicd/bin/Release/netstandard2.0/*"
-        dir path: './azurefunctionscicd/bin/Release/netstandard2.0'
+        dir('builtSources') {
+          unstash name: 'builtSources'
+        }
+        sh "ls -al builtSources"
         azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
                                 resourceGroup: 'consplanuseast2', appName: 'consplanuseast2',
                                 filePath: 'azurefunctionscicd/bin/Release/netstandard2.0/**/*'
