@@ -1,10 +1,9 @@
 ﻿<Properties StartupConfiguration="{EB42A56D-0DF0-4BB9-810B-9BD79C5868F0}|Default">
   <MonoDevelop.Ide.ItemProperties.azurefunctionscicd PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="azurefunctionscicd/HttpTrigger.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="azurefunctionscicd/HttpTrigger2.cs">
     <Files>
-      <File FileName="azurefunctionscicd/HttpTrigger.cs" Line="1" Column="1" />
-      <File FileName="azurefunctionscicd/local.settings.json" Line="1" Column="1" />
-      <File FileName="azurefunctionscicd/host.json" Line="1" Column="1" />
+      <File FileName="azurefunctionscicd/HttpTrigger.cs" Line="14" Column="35" />
+      <File FileName="azurefunctionscicd/HttpTrigger2.cs" Line="26" Column="74" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

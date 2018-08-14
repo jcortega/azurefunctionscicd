@@ -16,4 +16,7 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="HttpTrigger %28copy%29.cs" />
+  </ItemGroup>
 </Project>
