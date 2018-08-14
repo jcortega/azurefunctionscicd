@@ -11,9 +11,7 @@ pipeline {
       steps {
 
         sh "nuget restore"
-        sh "msbuild"
-        sh "ls azurefunctionscicd/bin/*"
-        sh "ls azurefunctionscicd/bin/**/*"
+        sh "msbuild /t:Build /p:Configuration=Release"
         stash name: 'builtSources'
       }
     }
@@ -22,7 +20,7 @@ pipeline {
 
         sh "rm -rf ./*"
         unstash name: 'builtSources'
-        sh "ls ./azurefunctionscicd/bin/Debug/netstandard2.0"
+        sh "ls ./azurefunctionscicd/bin/Release/netstandard2.0"
       }
     }
   }
