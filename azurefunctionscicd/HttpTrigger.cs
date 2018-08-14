@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
 
-namespace TestAzure
+namespace azurefunctionscicd
 {
     public static class HttpTrigger
     {
