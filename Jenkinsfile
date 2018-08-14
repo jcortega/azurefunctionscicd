@@ -12,7 +12,10 @@ pipeline {
 
         sh "nuget restore"
         sh "msbuild /t:Build /p:Configuration=Release"
-        stash name: 'builtSources'
+        dir('./azurefunctionscicd/bin/Release/netstandard2.0/') {
+          stash name: 'builtSources'
+        }
+
       }
     }
     stage('Deploy') {
