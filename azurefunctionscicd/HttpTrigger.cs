@@ -12,7 +12,7 @@ namespace azurefunctionscicd
     public static class HttpTrigger
     {
         [FunctionName("HttpTrigger")]
-        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, TraceWriter log)
+        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequest req, TraceWriter log)
         {
             log.Info("C# HTTP trigger function processed a request.");
 
@@ -23,7 +23,7 @@ namespace azurefunctionscicd
             name = name ?? data?.name;
 
             return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name}")
+                ? (ActionResult)new OkObjectResult($"Hello there, {name}")
                 : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
         }
     }
