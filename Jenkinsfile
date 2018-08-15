@@ -64,6 +64,11 @@ pipeline {
     //   }
     // }
     stage('Destroy Test Environment') {
+      agent {
+        docker {
+            image 'microsoft/azure-cli'
+        }
+      }
        steps {
          echo "Destroying test environment..."
          sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
