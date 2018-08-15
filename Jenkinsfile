@@ -56,7 +56,7 @@ pipeline {
       steps {
         echo "Integration testing..."
         sh "sleep 60"
-        sh "curl -f https://consplanuseast2.azurewebsites.net/api/HttpTrigger?name=jenkins"
+        sh "curl -sf https://consplanuseast2.azurewebsites.net/api/HttpTrigger?name=jenkins"
       }
     }
     stage('Destroy Test Environment') {

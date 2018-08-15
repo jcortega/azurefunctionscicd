@@ -129,7 +129,7 @@
                     },
                     {
                         "name": "WEBSITE_CONTENTSHARE",
-                        "value": "[concat(toLower(parameters('name')), 'a06d')]"
+                        "value": "[concat(toLower(parameters('site_name')), 'a06d')]"
                     },
                     {
                         "name": "WEBSITE_NODE_DEFAULT_VERSION",
