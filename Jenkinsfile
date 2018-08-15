@@ -70,9 +70,11 @@ pipeline {
         }
       }
        steps {
-         echo "Destroying test environment..."
-         sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
-         sh 'az group delete --name functions-branch-${GIT_BRANCH}-build-${BUILD_ID} --yes'
+         withCredentials([azureServicePrincipal('jerome-azure-personal')]) {
+           echo "Destroying test environment..."
+           sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
+           sh 'az group delete --name functions-branch-${GIT_BRANCH}-build-${BUILD_ID} --yes'
+         }
        }
     }
   }
