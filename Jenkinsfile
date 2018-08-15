@@ -51,16 +51,11 @@ pipeline {
         sh "sleep 60"
         unstash name: 'builtSources'
         withCredentials([azureServicePrincipal('jerome-azure-personal')]) {
-          echo "Destroying function..."
-          dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
-            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
+          sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
+          sh "cd ./azurefunctionscicd/bin/Release/netstandard2.0/ && rm -rf function.zip && zip -r function.zip ./*"
+          sh "ls -al function.zip"
+          sh "az functionapp deployment source config-zip -g functions-branch-${GIT_BRANCH}-build-${BUILD_ID} -n consplanuseast2 --src function.zip"
 
-            sh "rm -rf function.zip && zip -r function.zip ./*"
-            sh "ls -al function.zip"
-
-            sh "az functionapp deployment source config-zip -g functions-branch-${GIT_BRANCH}-build-${BUILD_ID} -n consplanuseast2 --src function.zip"
-
-          }
         }
 
         // dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
