@@ -6,11 +6,11 @@
             "defaultValue": "consplanuseast2",
             "type": "String"
         },
-        "serverfarms_EastUS2Plan_name": {
+        "serverfarm_plan": {
             "defaultValue": "EastUS2Plan",
             "type": "String"
         },
-        "storageAccounts_consplanuseast28091_name": {
+        "storage_account_name": {
             "defaultValue": "consplanuseast28091",
             "type": "String"
         }
@@ -25,7 +25,7 @@
                 "tier": "Standard"
             },
             "kind": "Storage",
-            "name": "[parameters('storageAccounts_consplanuseast28091_name')]",
+            "name": "[parameters('storage_account_name')]",
             "apiVersion": "2018-03-01-preview",
             "location": "eastus2",
             "tags": {},
@@ -63,12 +63,12 @@
                 "capacity": 0
             },
             "kind": "functionapp",
-            "name": "[parameters('serverfarms_EastUS2Plan_name')]",
+            "name": "[parameters('serverfarm_plan')]",
             "apiVersion": "2016-09-01",
             "location": "East US 2",
             "scale": null,
             "properties": {
-                "name": "[parameters('serverfarms_EastUS2Plan_name')]",
+                "name": "[parameters('serverfarm_plan')]",
                 "workerTierName": null,
                 "adminSiteName": null,
                 "hostingEnvironmentProfile": null,
@@ -107,13 +107,33 @@
                         "hostType": "Repository"
                     }
                 ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_EastUS2Plan_name'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarm_plan'))]",
                 "reserved": false,
                 "siteConfig": {
                   "appSettings": [
                     {
                         "name": "FUNCTIONS_EXTENSION_VERSION",
                         "value": "~2"
+                    },
+                    {
+                        "name": "AzureWebJobsDashboard",
+                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storage_account_name'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name')), '2015-05-01-preview').key1)]"
+                    },
+                    {
+                        "name": "AzureWebJobsStorage",
+                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storage_account_name'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name')), '2015-05-01-preview').key1)]"
+                    },
+                    {
+                        "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storage_account_name'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name')), '2015-05-01-preview').key1)]"
+                    },
+                    {
+                        "name": "WEBSITE_CONTENTSHARE",
+                        "value": "[concat(toLower(parameters('name')), 'a06d')]"
+                    },
+                    {
+                        "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                        "value": "6.5.0"
                     }]
                 },
                 "scmSiteAlsoStopped": false,
@@ -126,7 +146,7 @@
                 "cloningInfo": null
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_EastUS2Plan_name'))]"
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarm_plan'))]"
             ]
         },
         {
