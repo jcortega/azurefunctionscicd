@@ -45,7 +45,7 @@ pipeline {
         unstash name: 'builtSources'
         dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
           azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
-                                  resourceGroup: "functions-branch-${GIT_BRANCH}-build-${BUILD_ID}", appName: 'consplanuseast2',
+                                  resourceGroup: "consplanuseast2", appName: 'consplanuseast2',
                                   filePath: '**/*'
         }
       }
