@@ -42,6 +42,8 @@ pipeline {
     }
     stage('Deploy Function') {
       steps {
+        echo "Wait 60 seconds before deploying function..."
+        sh "sleep 60"
         unstash name: 'builtSources'
         dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
           azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
@@ -53,6 +55,7 @@ pipeline {
     stage('Integration Test') {
       steps {
         echo "Integration testing..."
+        sh "sleep 60"
       }
     }
     stage('Destroy Test Environment') {
