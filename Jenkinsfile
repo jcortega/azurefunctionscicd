@@ -34,8 +34,8 @@ pipeline {
       steps {
         withCredentials([azureServicePrincipal('jerome-azure-personal')]) {
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
-            sh 'az group create --name azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --location "East US 2"'
-            sh 'az group deployment create  --name azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --resource-group azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --template-file ./infrastructure/template.json'
+            sh 'az group create --name functions-branch-${GIT_BRANCH}-build-${BUILD_ID} --location "East US 2"'
+            sh 'az group deployment create  --name functions-branch-${GIT_BRANCH}-build-${BUILD_ID} --resource-group functions-branch-${GIT_BRANCH}-build-${BUILD_ID} --template-file ./infrastructure/template.json'
         }
 
 
@@ -72,7 +72,7 @@ pipeline {
        steps {
          echo "Destroying test environment..."
          sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
-         sh 'az group delete --name azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --yes'
+         sh 'az group delete --name functions-branch-${GIT_BRANCH}-build-${BUILD_ID} --yes'
        }
     }
   }
