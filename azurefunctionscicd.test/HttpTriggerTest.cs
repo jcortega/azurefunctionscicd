@@ -19,12 +19,12 @@ namespace azurefunctionscicd.test
         public async Task Request_With_Query()
         {
             var query = new Dictionary<String, StringValues>();
-            query.TryAdd("name", "ushio");
+            query.TryAdd("name", "jerome");
             var body = "";
 
             var result = HttpTrigger.Run(req: HttpRequestSetup(query, body), log: log);
             var resultObject = (OkObjectResult)result;
-            Assert.AreEqual("Hello, ushio", resultObject.Value);
+            Assert.AreEqual("Hello there, jerome.", resultObject.Value);
             
         }
 
@@ -32,11 +32,11 @@ namespace azurefunctionscicd.test
         public async Task Request_Without_Query()
         {
             var query = new Dictionary<String, StringValues>();
-            var body = "{\"name\":\"yamada\"}";
+            var body = "{\"name\":\"ortega\"}";
 
             var result = HttpTrigger.Run(HttpRequestSetup(query, body), log);
             var resultObject = (OkObjectResult)result;
-            Assert.AreEqual("Hello, yamada", resultObject.Value);
+            Assert.AreEqual("Hello there, ortega", resultObject.Value);
 
         }
 

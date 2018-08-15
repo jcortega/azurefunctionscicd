@@ -25,7 +25,11 @@ pipeline {
         sh "cd ./azurefunctionscicd.test && dotnet test"
       }
     }
-    stage('Deploy') {
+    stage('Deploy Test Environment') {
+      steps {
+      }
+    }
+    stage('Deploy Function') {
       steps {
 
         //sh "rm -rf ./*"
@@ -36,7 +40,14 @@ pipeline {
                                   resourceGroup: 'consplanuseast2', appName: 'consplanuseast2',
                                   filePath: '**/*'
         }
-
+      }
+    }
+    stage('Integration Test') {
+      steps {
+      }
+    }
+    stage('Destroy Test Environment') {
+      steps {
       }
     }
   }
