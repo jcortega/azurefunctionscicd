@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "sites_consplanuseast2_name": {
+        "site_name": {
             "defaultValue": "consplanuseast2",
             "type": "String"
         },
@@ -20,10 +20,6 @@
         },
         "storageAccounts_consplanuseast28091_name": {
             "defaultValue": "consplanuseast28091",
-            "type": "String"
-        },
-        "hostNameBindings_consplanuseast2.azurewebsites.net_name": {
-            "defaultValue": "consplanuseast2.azurewebsites.net",
             "type": "String"
         }
     },
@@ -135,7 +131,7 @@
             "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Web/sites/consplanuseast2'.",
             "type": "Microsoft.Web/sites",
             "kind": "functionapp",
-            "name": "[parameters('sites_consplanuseast2_name')]",
+            "name": "[parameters('site_name')]",
             "apiVersion": "2016-08-01",
             "location": "East US 2",
             "scale": null,
@@ -143,7 +139,7 @@
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "[concat(parameters('sites_consplanuseast2_name'),'.azurewebsites.net')]",
+                        "name": "[concat(parameters('site_name'),'.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "virtualIP": null,
                         "thumbprint": null,
@@ -151,7 +147,7 @@
                         "hostType": "Standard"
                     },
                     {
-                        "name": "[concat(parameters('sites_consplanuseast2_name'),'.scm.azurewebsites.net')]",
+                        "name": "[concat(parameters('site_name'),'.scm.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "virtualIP": null,
                         "thumbprint": null,
@@ -184,7 +180,7 @@
         {
             "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Web/sites/consplanuseast2/hostNameBindings/consplanuseast2.azurewebsites.net'.",
             "type": "Microsoft.Web/sites/hostNameBindings",
-            "name": "[concat(parameters('sites_consplanuseast2_name'), '/', parameters('hostNameBindings_consplanuseast2.azurewebsites.net_name'))]",
+            "name": "[concat(parameters('site_name'), '/', parameters('site_name'), '.azurewebsites.net')]",
             "apiVersion": "2016-08-01",
             "location": "East US 2",
             "scale": null,
@@ -194,7 +190,7 @@
                 "hostNameType": "Verified"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_consplanuseast2_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('site_name'))]"
             ]
         }
     ]
