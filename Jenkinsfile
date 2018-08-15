@@ -35,8 +35,9 @@ pipeline {
         withCredentials([azureServicePrincipal('jerome-azure-personal')]) {
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
             sh 'az group create --name azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --location "East US 2"'
+            sh 'az group deployment create  --name azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --resource-group azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --template-file ./infrastructure/template.json'
         }
-        
+
 
 
         //azureCLI commands: [
@@ -62,11 +63,12 @@ pipeline {
     //     echo "Integration testing..."
     //   }
     // }
-    // stage('Destroy Test Environment') {
-    //   steps {
-    //     echo "Destroying test environment..."
-    // az group delete --name azurefunctionscicd-dev --yes
-    //   }
-    // }
+    stage('Destroy Test Environment') {
+       steps {
+         echo "Destroying test environment..."
+         sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
+         sh 'az group delete --name azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --yes'
+       }
+    }
   }
 }
