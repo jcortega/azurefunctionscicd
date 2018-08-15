@@ -10,14 +10,6 @@
             "defaultValue": "EastUS2Plan",
             "type": "String"
         },
-        "components_consplanuseast2_name": {
-            "defaultValue": "consplanuseast2",
-            "type": "String"
-        },
-        "components_consplanuseast2_a2a6_name": {
-            "defaultValue": "consplanuseast2-a2a6",
-            "type": "String"
-        },
         "storageAccounts_consplanuseast28091_name": {
             "defaultValue": "consplanuseast28091",
             "type": "String"
@@ -25,46 +17,6 @@
     },
     "variables": {},
     "resources": [
-        {
-            "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/microsoft.insights/components/consplanuseast2-a2a6'.",
-            "type": "microsoft.insights/components",
-            "kind": "web",
-            "name": "[parameters('components_consplanuseast2_a2a6_name')]",
-            "apiVersion": "2015-05-01",
-            "location": "westeurope",
-            "tags": {
-                "hidden-link:/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Web/sites/consplanuseast2": "Resource"
-            },
-            "scale": null,
-            "properties": {
-                "Application_Type": "web",
-                "Flow_Type": null,
-                "Request_Source": "IbizaWebAppExtensionCreate",
-                "HockeyAppId": null,
-                "SamplingPercentage": null
-            },
-            "dependsOn": []
-        },
-        {
-            "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/microsoft.insights/components/consplanuseast2'.",
-            "type": "microsoft.insights/components",
-            "kind": "web",
-            "name": "[parameters('components_consplanuseast2_name')]",
-            "apiVersion": "2015-05-01",
-            "location": "eastus",
-            "tags": {
-                "hidden-link:/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Web/sites/consplanuseast2": "Resource"
-            },
-            "scale": null,
-            "properties": {
-                "Application_Type": "web",
-                "Flow_Type": null,
-                "Request_Source": "IbizaWebAppExtensionCreate",
-                "HockeyAppId": null,
-                "SamplingPercentage": null
-            },
-            "dependsOn": []
-        },
         {
             "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Storage/storageAccounts/consplanuseast28091'.",
             "type": "Microsoft.Storage/storageAccounts",
