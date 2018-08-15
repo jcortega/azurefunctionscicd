@@ -22,9 +22,7 @@ pipeline {
         }
       }
       steps {
-        dir("./azurefunctionscicd.test") {
-          sh "dotnet test"
-        }
+        sh "cd ./azurefunctionscicd.test && dotnet test"
       }
     }
     stage('Deploy') {
