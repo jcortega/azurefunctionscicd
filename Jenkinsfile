@@ -15,6 +15,16 @@ pipeline {
         stash name: 'builtSources'
       }
     }
+    stage('Unit Test') {
+      agent {
+        docker {
+            image 'microsoft/dotnet'
+        }
+      }
+      steps {
+        sh "ls"
+      }
+    }
     stage('Deploy') {
       steps {
 

@@ -1,10 +1,28 @@
-﻿<Properties StartupConfiguration="{EB42A56D-0DF0-4BB9-810B-9BD79C5868F0}|Default">
-  <MonoDevelop.Ide.ItemProperties.azurefunctionscicd PreferredExecutionTarget="MonoDevelop.Default" FirstBuild="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="azurefunctionscicd/HttpTrigger2.cs">
+﻿<Properties StartupConfiguration="{B9C55B6A-2185-4AA3-B3F1-6EEFE13D72A9}|Unit Tests">
+  <MonoDevelop.Ide.ItemProperties.azurefunctionscicd PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.azurefunctionscicd.test PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="FunctionTestHelper/FunctionTest.cs">
     <Files>
-      <File FileName="azurefunctionscicd/HttpTrigger.cs" Line="14" Column="35" />
-      <File FileName="azurefunctionscicd/HttpTrigger2.cs" Line="26" Column="74" />
+      <File FileName="azurefunctionscicd/HttpTrigger.cs" Line="15" Column="41" />
+      <File FileName="azurefunctionscicd/HttpTrigger2.cs" Line="25" Column="32" />
+      <File FileName="azurefunctionscicd.test/HttpTriggerTest.cs" Line="37" Column="25" />
+      <File FileName="FunctionTestHelper/FunctionTest.cs" Line="20" Column="35" />
     </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="azurefunctionscicd" expanded="True">
+            <Node name="azurefunctionscicd.test" expanded="True">
+              <Node name="azurefunctionscicd" expanded="True">
+                <Node name="test" expanded="True">
+                  <Node name="HttpTriggerTest" expanded="True" selected="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
