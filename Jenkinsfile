@@ -34,6 +34,7 @@ pipeline {
       steps {
         withCredentials([azureServicePrincipal('jerome-azure-personal')]) {
             sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
+            sh 'az group create --name azurefunctionscicd-${GIT_BRANCH}-${BUILD_ID} --location "East US 2"'
         }
 
 
