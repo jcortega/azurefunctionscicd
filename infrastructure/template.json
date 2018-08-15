@@ -2,15 +2,15 @@
     "parameters": {
         "name": {
             "type": "string",
-            "default": "consplanuseast2"
+            "defaultValue": "consplanuseast2"
         },
         "storageName": {
             "type": "string",
-            "default": "consplanuseast2stoa3d5"
+            "defaultValue": "consplanuseast2stoa3d5"
         },
         "location": {
             "type": "string",
-            "default": "East US 2"
+            "defaultValue": "East US 2"
         }
     },
     "resources": [
