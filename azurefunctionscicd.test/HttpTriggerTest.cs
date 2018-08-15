@@ -36,7 +36,7 @@ namespace azurefunctionscicd.test
 
             var result = HttpTrigger.Run(HttpRequestSetup(query, body), log);
             var resultObject = (OkObjectResult)result;
-            Assert.AreEqual("Hello there, ortega", resultObject.Value);
+            Assert.AreEqual("Hello there, ortega.", resultObject.Value);
 
         }
 
