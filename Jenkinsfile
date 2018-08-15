@@ -41,28 +41,13 @@ pipeline {
     //   }
     // }
     stage('Deploy Function') {
-      agent {
-        docker {
-            image 'microsoft/azure-cli'
-        }
-      }
       steps {
-        echo "Wait 60 seconds before deploying function..."
-        sh "sleep 60"
         unstash name: 'builtSources'
-        withCredentials([azureServicePrincipal('jerome-azure-personal')]) {
-          sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
-          sh "cd ./azurefunctionscicd/bin/Release/netstandard2.0/ && rm -rf function.zip && zip -r function.zip ./*"
-          sh "ls -al function.zip"
-          sh "az functionapp deployment source config-zip -g consplanuseast2 -n consplanuseast2 --src function.zip"
-
+        dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
+          azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
+                                  resourceGroup: "functions-branch-${GIT_BRANCH}-build-${BUILD_ID}", appName: 'consplanuseast2',
+                                  filePath: '**/*'
         }
-
-        // dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
-        //   azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
-        //                           resourceGroup: "functions-branch-${GIT_BRANCH}-build-${BUILD_ID}", appName: 'consplanuseast2',
-        //                           filePath: '**/*'
-        // }
       }
     }
     stage('Integration Test') {
