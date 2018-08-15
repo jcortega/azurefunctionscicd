@@ -27,6 +27,7 @@ pipeline {
     }
     stage('Deploy Test Environment') {
       steps {
+        echo "Deploying test environment..."
       }
     }
     stage('Deploy Function') {
@@ -44,10 +45,12 @@ pipeline {
     }
     stage('Integration Test') {
       steps {
+        echo "Integration testing..."
       }
     }
     stage('Destroy Test Environment') {
       steps {
+        echo "Destroying test environment..."
       }
     }
   }
