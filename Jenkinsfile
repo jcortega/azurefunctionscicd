@@ -32,9 +32,14 @@ pipeline {
         }
       }
       steps {
-        azureCLI commands: [
-          [exportVariablesString: '', script: 'az group create --name azurefunctionscicd-dev --location \'East US 2\''],
-          [exportVariablesString: '', script: 'az group deployment create  --name azurefunctionscicd-dev --resource-group azurefunctionscicd-dev --template-file template.json']], principalCredentialId: 'jerome-azure-personal'
+        withCredentials([azureServicePrincipal('jerome-azure-personal')]) {
+            sh 'az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID'
+        }
+
+
+        //azureCLI commands: [
+        //  [exportVariablesString: '', script: 'az group create --name azurefunctionscicd-dev --location \'East US 2\''],
+        //  [exportVariablesString: '', script: 'az group deployment create  --name azurefunctionscicd-dev --resource-group azurefunctionscicd-dev --template-file template.json']], principalCredentialId: 'jerome-azure-personal'
       }
     }
     // stage('Deploy Function') {
