@@ -1,169 +1,72 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
     "parameters": {
-        "site_name": {
-            "defaultValue": "consplanuseast2",
-            "type": "String"
+        "name": {
+            "type": "string",
+            "default": "consplanuseast2"
         },
-        "serverfarm_plan": {
-            "defaultValue": "EastUS2Plan",
-            "type": "String"
+        "storageName": {
+            "type": "string",
+            "default": "consplanuseast2stoa3d5"
         },
-        "storage_account_name": {
-            "defaultValue": "consplanuseast28091",
-            "type": "String"
+        "location": {
+            "type": "string",
+            "default": "East US 2"
         }
     },
-    "variables": {},
     "resources": [
         {
-            "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Storage/storageAccounts/consplanuseast28091'.",
-            "type": "Microsoft.Storage/storageAccounts",
-            "sku": {
-                "name": "Standard_LRS",
-                "tier": "Standard"
-            },
-            "kind": "Storage",
-            "name": "[parameters('storage_account_name')]",
-            "apiVersion": "2018-03-01-preview",
-            "location": "eastus2",
-            "tags": {},
-            "scale": null,
-            "properties": {
-                "networkAcls": {
-                    "bypass": "AzureServices",
-                    "virtualNetworkRules": [],
-                    "ipRules": [],
-                    "defaultAction": "Allow"
-                },
-                "supportsHttpsTrafficOnly": false,
-                "encryption": {
-                    "services": {
-                        "file": {
-                            "enabled": true
-                        },
-                        "blob": {
-                            "enabled": true
-                        }
-                    },
-                    "keySource": "Microsoft.Storage"
-                }
-            },
-            "dependsOn": []
-        },
-        {
-            "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Web/serverfarms/EastUS2Plan'.",
-            "type": "Microsoft.Web/serverfarms",
-            "sku": {
-                "name": "Y1",
-                "tier": "Dynamic",
-                "size": "Y1",
-                "family": "Y",
-                "capacity": 0
-            },
-            "kind": "functionapp",
-            "name": "[parameters('serverfarm_plan')]",
-            "apiVersion": "2016-09-01",
-            "location": "East US 2",
-            "scale": null,
-            "properties": {
-                "name": "[parameters('serverfarm_plan')]",
-                "workerTierName": null,
-                "adminSiteName": null,
-                "hostingEnvironmentProfile": null,
-                "perSiteScaling": false,
-                "reserved": false,
-                "targetWorkerCount": 0,
-                "targetWorkerSizeId": 0
-            },
-            "dependsOn": []
-        },
-        {
-            "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Web/sites/consplanuseast2'.",
+            "apiVersion": "2016-03-01",
+            "name": "[parameters('name')]",
             "type": "Microsoft.Web/sites",
-            "kind": "functionapp",
-            "name": "[parameters('site_name')]",
-            "apiVersion": "2016-08-01",
-            "location": "East US 2",
-            "scale": null,
             "properties": {
-                "enabled": true,
-                "hostNameSslStates": [
-                    {
-                        "name": "[concat(parameters('site_name'),'.azurewebsites.net')]",
-                        "sslState": "Disabled",
-                        "virtualIP": null,
-                        "thumbprint": null,
-                        "toUpdate": null,
-                        "hostType": "Standard"
-                    },
-                    {
-                        "name": "[concat(parameters('site_name'),'.scm.azurewebsites.net')]",
-                        "sslState": "Disabled",
-                        "virtualIP": null,
-                        "thumbprint": null,
-                        "toUpdate": null,
-                        "hostType": "Repository"
-                    }
-                ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarm_plan'))]",
-                "reserved": false,
+                "name": "[parameters('name')]",
                 "siteConfig": {
-                  "appSettings": [
-                    {
-                        "name": "FUNCTIONS_EXTENSION_VERSION",
-                        "value": "~2"
-                    },
-                    {
-                        "name": "AzureWebJobsDashboard",
-                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storage_account_name'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name')), '2015-05-01-preview').key1)]"
-                    },
-                    {
-                        "name": "AzureWebJobsStorage",
-                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storage_account_name'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name')), '2015-05-01-preview').key1)]"
-                    },
-                    {
-                        "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storage_account_name'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name')), '2015-05-01-preview').key1)]"
-                    },
-                    {
-                        "name": "WEBSITE_CONTENTSHARE",
-                        "value": "[concat(toLower(parameters('site_name')), 'a06d')]"
-                    },
-                    {
-                        "name": "WEBSITE_NODE_DEFAULT_VERSION",
-                        "value": "6.5.0"
-                    }]
+                    "appSettings": [
+                        {
+                            "name": "AzureWebJobsDashboard",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~2"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageName')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[concat(toLower(parameters('name')), 'b996')]"
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "6.5.0"
+                        }
+                    ]
                 },
-                "scmSiteAlsoStopped": false,
-                "hostingEnvironmentProfile": null,
                 "clientAffinityEnabled": false,
-                "clientCertEnabled": false,
-                "hostNamesDisabled": false,
-                "containerSize": 1536,
-                "dailyMemoryTimeQuota": 0,
-                "cloningInfo": null
+                "reserved": false
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarm_plan'))]"
-            ]
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+            ],
+            "location": "East US 2",
+            "kind": "functionapp"
         },
         {
-            "comments": "Generalized from resource: '/subscriptions/24624284-b6fa-407a-9c77-aee8ac8ad2df/resourceGroups/consplanuseast2/providers/Microsoft.Web/sites/consplanuseast2/hostNameBindings/consplanuseast2.azurewebsites.net'.",
-            "type": "Microsoft.Web/sites/hostNameBindings",
-            "name": "[concat(parameters('site_name'), '/', parameters('site_name'), '.azurewebsites.net')]",
-            "apiVersion": "2016-08-01",
-            "location": "East US 2",
-            "scale": null,
+            "apiVersion": "2015-05-01-preview",
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageName')]",
+            "location": "[parameters('location')]",
             "properties": {
-                "siteName": "consplanuseast2",
-                "domainId": null,
-                "hostNameType": "Verified"
-            },
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('site_name'))]"
-            ]
+                "accountType": "Standard_LRS"
+            }
         }
-    ]
+    ],
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0"
 }
