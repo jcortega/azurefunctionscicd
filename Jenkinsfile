@@ -43,7 +43,6 @@ pipeline {
     stage('Deploy Function') {
       steps {
 
-        //sh "rm -rf ./*"
         sh "ls ./azurefunctionscicd/bin/Release/netstandard2.0/*"
         unstash name: 'builtSources'
         dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
