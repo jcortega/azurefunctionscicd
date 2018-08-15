@@ -7,51 +7,59 @@ pipeline {
   }
 
   stages {
-    stage('Build') {
-      steps {
-
-        sh "nuget restore"
-        sh "msbuild /t:Build /p:Configuration=Release"
-        stash name: 'builtSources'
-      }
-    }
-    stage('Unit Test') {
+    // stage('Build') {
+    //   steps {
+    //
+    //     sh "nuget restore"
+    //     sh "msbuild /t:Build /p:Configuration=Release"
+    //     stash name: 'builtSources'
+    //   }
+    // }
+    // stage('Unit Test') {
+    //   agent {
+    //     docker {
+    //         image 'microsoft/dotnet'
+    //     }
+    //   }
+    //   steps {
+    //     sh "cd ./azurefunctionscicd.test && dotnet test"
+    //   }
+    // }
+    stage('Deploy Test Environment') {
       agent {
         docker {
-            image 'microsoft/dotnet'
+            image 'microsoft/azure-cli'
         }
       }
       steps {
-        sh "cd ./azurefunctionscicd.test && dotnet test"
+        azureCLI commands: [
+          [exportVariablesString: '', script: 'az group create --name azurefunctionscicd-dev --location \'East US 2\''],
+          [exportVariablesString: '', script: 'az group deployment create  --name azurefunctionscicd-dev --resource-group azurefunctionscicd-dev --template-file template.json']], principalCredentialId: 'jerome-azure-personal'
       }
     }
-    stage('Deploy Test Environment') {
-      steps {
-        echo "Deploying test environment..."
-      }
-    }
-    stage('Deploy Function') {
-      steps {
-
-        //sh "rm -rf ./*"
-        sh "ls ./azurefunctionscicd/bin/Release/netstandard2.0/*"
-        unstash name: 'builtSources'
-        dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
-          azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
-                                  resourceGroup: 'consplanuseast2', appName: 'consplanuseast2',
-                                  filePath: '**/*'
-        }
-      }
-    }
-    stage('Integration Test') {
-      steps {
-        echo "Integration testing..."
-      }
-    }
-    stage('Destroy Test Environment') {
-      steps {
-        echo "Destroying test environment..."
-      }
-    }
+    // stage('Deploy Function') {
+    //   steps {
+    //
+    //     //sh "rm -rf ./*"
+    //     sh "ls ./azurefunctionscicd/bin/Release/netstandard2.0/*"
+    //     unstash name: 'builtSources'
+    //     dir('azurefunctionscicd/bin/Release/netstandard2.0/') {
+    //       azureFunctionAppPublish azureCredentialsId: 'jerome-azure-personal',
+    //                               resourceGroup: 'consplanuseast2', appName: 'consplanuseast2',
+    //                               filePath: '**/*'
+    //     }
+    //   }
+    // }
+    // stage('Integration Test') {
+    //   steps {
+    //     echo "Integration testing..."
+    //   }
+    // }
+    // stage('Destroy Test Environment') {
+    //   steps {
+    //     echo "Destroying test environment..."
+    // az group delete --name azurefunctionscicd-dev --yes
+    //   }
+    // }
   }
 }
