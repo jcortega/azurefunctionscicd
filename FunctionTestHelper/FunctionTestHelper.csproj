@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+  <dependentAssembly>
+      <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+      <bindingRedirect oldVersion="0.0.0.0-10.0.0.0" newVersion="10.0.0.0" />
+  </dependentAssembly>
+  
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
@@ -11,5 +15,6 @@
     <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Http" Version="3.0.0-beta3" />
     <PackageReference Include="Moq" Version="4.8.1" />
   </ItemGroup>
+
 
 </Project>
