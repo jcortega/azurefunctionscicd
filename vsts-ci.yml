@@ -1,12 +1,7 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-phases:
-  phase: BuildJob
-  - task: MSBuild@1
-    inputs:
-      restoreNugetPackages: true
-  phase: UnitTest
-  - task: VSTest@2
+steps:
+- task: MSBuild@1
+  displayName: Build
+  inputs:
+    restoreNugetPackages: true
+- task: UnitTest
+  displayName: Unit test
