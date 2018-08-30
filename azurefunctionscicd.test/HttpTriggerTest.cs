@@ -19,7 +19,7 @@ namespace azurefunctionscicd.test
         public async Task Request_With_Query()
         {
             var query = new Dictionary<String, StringValues>();
-            query.TryAdd("name", "jerome");
+            query.Add("name", "jerome");
             var body = "";
 
             var result = HttpTrigger.Run(req: HttpRequestSetup(query, body), log: log);
