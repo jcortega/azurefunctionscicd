@@ -8,4 +8,4 @@ steps:
   displayName: Unit test
   inputs:
     command: test
-    projects: **/azurefunctionscicd.test/*.csproj
+    projects: "**/azurefunctionscicd.test/*.csproj"
