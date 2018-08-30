@@ -3,5 +3,5 @@ steps:
   displayName: Build
   inputs:
     restoreNugetPackages: true
-- task: UnitTest
+- task: VSTest@2
   displayName: Unit test
