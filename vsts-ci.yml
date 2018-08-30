@@ -4,7 +4,5 @@ steps:
 - task: NuGetCommand@2
 - task: MSBuild@1
   displayName: Build
-  inputs:
-    restoreNugetPackages: true
 - task: VSTest@2
   displayName: Unit test
