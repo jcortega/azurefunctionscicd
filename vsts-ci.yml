@@ -1,5 +1,5 @@
 trigger:
-- *
+- '*'
 steps:
 - task: NuGetCommand@2
 - task: MSBuild@1
