@@ -7,10 +7,10 @@ using System;
 using Microsoft.Extensions.Primitives;
 using Microsoft.AspNetCore.Http.Internal;
 using System.IO;
-using azurefunctionscicd;
+using DotNet;
 using Microsoft.AspNetCore.Mvc;
 
-namespace azurefunctionscicd.test
+namespace DotNet.Test
 {
     [TestClass]
     public class HttpTriggerTest : FunctionTestHelper.FunctionTest
@@ -19,24 +19,24 @@ namespace azurefunctionscicd.test
         public async Task Request_With_Query()
         {
             var query = new Dictionary<String, StringValues>();
-            query.Add("name", "jerome");
+            query.TryAdd("name", "ushio");
             var body = "";
 
-            var result = HttpTrigger.Run(req: HttpRequestSetup(query, body), log: log);
+            var result = await HttpTrigger.RunAsync(req: HttpRequestSetup(query, body), log: log);
             var resultObject = (OkObjectResult)result;
-            Assert.AreEqual("Hi jerome.", resultObject.Value);
-
+            Assert.AreEqual("Hello, ushio", resultObject.Value);
+            
         }
 
         [TestMethod]
         public async Task Request_Without_Query()
         {
             var query = new Dictionary<String, StringValues>();
-            var body = "{\"name\":\"ortega\"}";
+            var body = "{\"name\":\"yamada\"}";
 
-            var result = HttpTrigger.Run(HttpRequestSetup(query, body), log);
+            var result = await HttpTrigger.RunAsync(HttpRequestSetup(query, body), log);
             var resultObject = (OkObjectResult)result;
-            Assert.AreEqual("Hi ortega.", resultObject.Value);
+            Assert.AreEqual("Hello, yamada", resultObject.Value);
 
         }
 
@@ -45,7 +45,7 @@ namespace azurefunctionscicd.test
         {
             var query = new Dictionary<String, StringValues>();
             var body = "";
-            var result = HttpTrigger.Run(HttpRequestSetup(query, body), log);
+            var result = await HttpTrigger.RunAsync(HttpRequestSetup(query, body), log);
             var resultObject = (BadRequestObjectResult)result;
             Assert.AreEqual("Please pass a name on the query string or in the request body", resultObject.Value);
         }

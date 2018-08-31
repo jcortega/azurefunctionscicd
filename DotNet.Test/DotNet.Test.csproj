@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\azurefunctionscicd\azurefunctionscicd.csproj" />
+    <ProjectReference Include="..\DotNet\DotNet.csproj" />
     <ProjectReference Include="..\FunctionTestHelper\FunctionTestHelper.csproj" />
   </ItemGroup>
 
