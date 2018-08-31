@@ -2,10 +2,17 @@ trigger:
 - '*'
 steps:
 - task: DotNetCoreInstaller@0
-- task: NuGetCommand@2
-- task: MSBuild@1
-  displayName: Build
 - task: DotNetCoreCLI@2
-  displayName: Unit test
   inputs:
-    command: test
+    command: restore
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build
+
+# - task: NuGetCommand@2
+# - task: MSBuild@1
+#   displayName: Build
+# - task: DotNetCoreCLI@2
+#   displayName: Unit test
+#   inputs:
+#     command: test
