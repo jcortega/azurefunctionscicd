@@ -1,11 +1,15 @@
 trigger:
 - '*'
 steps:
-- task: NuGetCommand@2
-- task: MSBuild@1
-  displayName: Build
+- task: DotNetCoreInstaller@0
+  inputs:
+   version: "2.1.300"
 - task: DotNetCoreCLI@2
-  displayName: Unit test
+  inputs:
+    command: restore
+- task: DotNetCoreCLI@2
+  inputs:
+    command: build
+- task: DotNetCoreCLI@2
   inputs:
     command: test
-    projects: "**/azurefunctionscicd.test/*.csproj"
