@@ -19,3 +19,8 @@ steps:
     command: test
     nobuild: true
     projects: azurefunctionscicd.test/azurefunctionscicd.test.csproj
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    azureSubscription: happopei-azure
+    appType: functionApp
+    resourceGroupName:  development
